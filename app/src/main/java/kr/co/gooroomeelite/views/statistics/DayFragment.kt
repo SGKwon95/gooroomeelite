@@ -61,32 +61,32 @@ class DayFragment : Fragment() {
             //REd, green, blue
             //am 5 ~ 12
             ChartDatas("05:00", arrayListOf(40F)),
-            ChartDatas("", arrayListOf(10F, 60F, 40f)),
-            ChartDatas("", arrayListOf(0f, 60F, 0f)),
-            ChartDatas("", arrayListOf(0f, 0f, 30F)),
-            ChartDatas("", arrayListOf(0F, 0f, 10f)),
-            ChartDatas("", arrayListOf(0F)),
-            ChartDatas(" ", arrayListOf(0f, 40F)),
+            ChartDatas("06:00", arrayListOf(10F, 60F, 40f)),
+            ChartDatas("07:00", arrayListOf(0f, 60F, 0f)),
+            ChartDatas("08:00", arrayListOf(0f, 0f, 30F)),
+            ChartDatas("09:00", arrayListOf(0F, 0f, 10f)),
+            ChartDatas("10:00", arrayListOf(0F)),
+            ChartDatas("11:00", arrayListOf(0f, 40F)),
             //pm 12 ~ 6
             ChartDatas("12:00", arrayListOf(0f, 50F)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f, 35f, 23f)),
+            ChartDatas("13:00", arrayListOf(0f)),
+            ChartDatas("14:00", arrayListOf(0f)),
+            ChartDatas("15:00", arrayListOf(0f)),
+            ChartDatas("16:00", arrayListOf(0f)),
+            ChartDatas("17:00", arrayListOf(0f, 35f, 23f)),
             //pm 18 ~ 24
             ChartDatas("18:00", arrayListOf(0f, 60f)),
-            ChartDatas("", arrayListOf(0f, 25f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(35f)),
-            ChartDatas("", arrayListOf(60f)),
+            ChartDatas("19:00", arrayListOf(0f, 25f)),
+            ChartDatas("20:00", arrayListOf(0f)),
+            ChartDatas("21:00", arrayListOf(0f)),
+            ChartDatas("22:00", arrayListOf(35f)),
+            ChartDatas("23:00", arrayListOf(60f)),
             ChartDatas("24:00", arrayListOf(60f)),
             //am 24 ~ 4
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
-            ChartDatas("", arrayListOf(0f)),
+            ChartDatas("01:00", arrayListOf(0f)),
+            ChartDatas("02:00", arrayListOf(0f)),
+            ChartDatas("03:00", arrayListOf(0f)),
+            ChartDatas("04:00", arrayListOf(0f)),
         )
     }
     override fun onCreateView(
@@ -195,6 +195,21 @@ class DayFragment : Fragment() {
                 binding.compareDayTimeImage.setLayoutParams(lp)
                 binding.compareDayTimeText.text = "0시간"
                 binding.compareDayTimeText.setTextColor(Color.parseColor("#80000000"))
+            }
+        }
+
+        viewModel.lists.observe(viewLifecycleOwner) {
+            //오늘
+            val dateNow: LocalDateTime = LocalDateTime.now()
+            val textformatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.HH.mm.ss")
+            var todayFormat: String = dateNow.format(textformatter)
+
+            it.forEachIndexed{index, subjects ->
+                Log.d("serverDateFormat111",subjects.dayStartTime.toString())
+//                Log.d("serverDateFormat",subjects.dayStartTime.toString())
+                var dayStartTimeFormat: String? = subjects.dayStartTime?.format(textformatter)
+                Log.d("serverDateFormat111",dayStartTimeFormat.toString())
+
             }
         }
     }
@@ -549,3 +564,37 @@ class DayFragment : Fragment() {
     }
     private fun divideDataFromFirebase() {}
 }
+
+//private val listData by lazy {
+//    mutableListOf(
+//        //REd, green, blue
+//        //am 5 ~ 12
+//        ChartDatas("05:00", arrayListOf(40F)),
+//        ChartDatas("06:00", arrayListOf(10F, 60F, 40f)),
+//        ChartDatas("07:00", arrayListOf(0f, 60F, 0f)),
+//        ChartDatas("08:00", arrayListOf(0f, 0f, 30F)),
+//        ChartDatas("09:00", arrayListOf(0F, 0f, 10f)),
+//        ChartDatas("10:00", arrayListOf(0F)),
+//        ChartDatas("11:00", arrayListOf(0f, 40F)),
+//        //pm 12 ~ 6
+//        ChartDatas("12:00", arrayListOf(0f, 50F)),
+//        ChartDatas("13:00", arrayListOf(0f)),
+//        ChartDatas("14:00", arrayListOf(0f)),
+//        ChartDatas("15:00", arrayListOf(0f)),
+//        ChartDatas("16:00", arrayListOf(0f)),
+//        ChartDatas("17:00", arrayListOf(0f, 35f, 23f)),
+//        //pm 18 ~ 24
+//        ChartDatas("18:00", arrayListOf(0f, 60f)),
+//        ChartDatas("19:00", arrayListOf(0f, 25f)),
+//        ChartDatas("20:00", arrayListOf(0f)),
+//        ChartDatas("21:00", arrayListOf(0f)),
+//        ChartDatas("22:00", arrayListOf(35f)),
+//        ChartDatas("23:00", arrayListOf(60f)),
+//        ChartDatas("24:00", arrayListOf(60f)),
+//        //am 24 ~ 4
+//        ChartDatas("01:00", arrayListOf(0f)),
+//        ChartDatas("02:00", arrayListOf(0f)),
+//        ChartDatas("03:00", arrayListOf(0f)),
+//        ChartDatas("04:00", arrayListOf(0f)),
+//    )
+//}

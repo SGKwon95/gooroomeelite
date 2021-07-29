@@ -11,6 +11,9 @@ data class Subjects(
     var studytime: Int = 0,
     var prevDocumentId: String? = null,
     var nextDocumentId: String? = null,
+    var dayStartTime : String? = null,
+
+    var time_01 : String? = null,
 
     @ServerTimestamp
     val timestamp: Date? = null,

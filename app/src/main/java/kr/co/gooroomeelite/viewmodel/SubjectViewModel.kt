@@ -21,15 +21,19 @@ class SubjectViewModel : ViewModel() {
     val uid: String
     //통계 페이지에서 사용
     val list = MutableLiveData<MutableList<Subject>>()
+    val lists = MutableLiveData<MutableList<Subjects>>()
 
     private var subjectListValue: MutableList<Subject> = mutableListOf()
+    private var subjectListValues: MutableList<Subjects> = mutableListOf()
     var subject: Subject? = null
+    var subjects: Subjects? = null
 
     init {
         db = FirebaseFirestore.getInstance()
         subjectList.value = LinkedList()
         uid = currentUser()!!.uid
         listSubject()
+        listSubjectDay()
         fetchSubjectList()
     }
 
@@ -39,9 +43,16 @@ class SubjectViewModel : ViewModel() {
             .whereEqualTo("uid", LoginUtils.getUid()!!)
             .get() //값이 변경 시 바로 값이 변경된다.
             .addOnSuccessListener { docs ->
+                Log.d("test1",docs.toString())
+//                for (document in docs) {
+//                    Log.d("test1", "${document.id} => ${document.data}")
+//
+//                }
+
                 if(docs != null) {
 //                    val tmp = mutableListOf<Subject>()
                     docs.documents.forEach {
+                        Log.d("test1",it.toString())
                         subject = it.toObject(Subject::class.java)!!
                         subjectListValue.add(subject!!)
                     }
@@ -49,6 +60,24 @@ class SubjectViewModel : ViewModel() {
                 }
             }
     }
+
+    fun listSubjectDay(){
+        FirebaseFirestore.getInstance()
+            .collection("subject")
+            .whereEqualTo("uid", LoginUtils.getUid()!!)
+            .get() //값이 변경 시 바로 값이 변경된다.
+            .addOnSuccessListener { docs ->
+                if(docs != null) {
+//                    val tmp = mutableListOf<Subject>()
+                    docs.documents.forEach {
+                        subjects = it.toObject(Subjects::class.java)!!
+                        subjectListValues.add(subjects!!)
+                    }
+                    lists.value = subjectListValues
+                }
+            }
+    }
+
 
     //과목별 전체
     private fun fetchSubjectList() { //주제 목록 가져오기

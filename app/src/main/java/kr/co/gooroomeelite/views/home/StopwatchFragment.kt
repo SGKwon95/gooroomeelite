@@ -272,12 +272,12 @@ class StopwatchFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun dayStartTimeStamp(){
         val subject = arguments?.getSerializable("subject") as kr.co.gooroomeelite.entity.Subject
-        val subjectStudyTime = subject.studytime //총 공부시간
-        val studytimeCopy : Int = subjectStudyTime.plus(hourMinute.toInt()) //과목별 공부시간 + 스톱워치 기록 (총시간) 1초가 30
-        val textformatters: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm부 ss초")
-        val dayStartTime : LocalDateTime = LocalDateTime.now()
+        val textformatters: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.HH.mm.ss")
+        val dayStartTime : LocalDateTime = LocalDateTime.now() //현재 시간
         val dayStartTimeValue : String = dayStartTime.format(textformatters) //"시작하기" 시간
-        Log.d("dayStartTime",dayStartTimeValue.toString())
+
+        val fieldNameFormatters: DateTimeFormatter = DateTimeFormatter.ofPattern("HH")
+        val fieldName: String = fieldNameFormatters.format(dayStartTime)
 
         FirebaseFirestore
             .getInstance()
@@ -291,8 +291,7 @@ class StopwatchFragment : Fragment() {
                     .getInstance()
                     .collection("subject")
                     .document(subjectId)
-                    .update("dayStartTime",dayStartTimeValue)
-
+                    .update("start_" + fieldName, dayStartTimeValue) //시작 시간: 시간
             }
     }
 
@@ -302,10 +301,8 @@ class StopwatchFragment : Fragment() {
         val subjectStudyTime = subject.studytime //총 공부시간
         val studytimeCopy : Int = subjectStudyTime.plus(hourMinute.toInt()) //과목별 공부시간 + 스톱워치 기록 (총시간) 1초가 30
         Log.d("timetime",hour.toString())
-        Log.d("timetime",hourMinute.toString())
-        Log.d("timetime",minute.toString())
-        Log.d("timetime",second.toString())
-        val textformatters: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm부 ss초")
+        Log.d("timetimeHourMinute",hourMinute.toString())
+        val textformatters: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd.HH.mm.ss")//년,월,일,시,분,초
         val dayStartTime : LocalDateTime = LocalDateTime.now()
         val dayEndtime : LocalDateTime = LocalDateTime.now()
 
@@ -314,6 +311,10 @@ class StopwatchFragment : Fragment() {
 
         Log.d("dayStartTimeEnd",dayEndtimeValue.toString())
         Log.d("dayStartTime",dayStartTimeValue.toString())
+
+        //시간 format
+        val fieldNameFormatters: DateTimeFormatter = DateTimeFormatter.ofPattern("HH")
+        val fieldName: String = fieldNameFormatters.format(dayStartTime)
 
         FirebaseFirestore
             .getInstance()
@@ -327,7 +328,8 @@ class StopwatchFragment : Fragment() {
                     .getInstance()
                     .collection("subject")
                     .document(subjectId)
-                    .update("dayEndtime",dayEndtimeValue)
+                    .update("End_" + fieldName, hourMinute)  //스톱워치 시간
+                Log.d("eeasdf",hourMinute.toString())
                 FirebaseFirestore
                     .getInstance()
                     .collection("subject")
