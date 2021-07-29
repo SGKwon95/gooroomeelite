@@ -1,5 +1,10 @@
 package kr.co.gooroomeelite.views.home
-
+/**
+ * @author Gnoss
+ * @email silmxmail@naver.com
+ * @created 2021-07-21
+ * @desc
+ */
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -34,6 +39,7 @@ class TimersettingActivity : AppCompatActivity() {
 
         // TimersettingActivity에서 StudyActivity로 이동
         btn_back.setOnClickListener {
+            pref()
             onBackPressed()
         }
 
@@ -179,13 +185,19 @@ class TimersettingActivity : AppCompatActivity() {
         editor.putBoolean("check",false).apply()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    fun pref(){
         val pref = getSharedPreferences("check",0)
         val editor = pref.edit()
-        editor.putString("focustime",binding.textFocustime.text.toString()).commit()
-        editor.putString("resttime",binding.textResttime.text.toString()).commit()
-        editor.putString("longresttime",binding.textLongresettime.text.toString()).commit()
-        editor.putString("settime",binding.textSettime.text.toString()).commit()
+        editor.putString("focustime",binding.textFocustime.text.toString())
+        editor.putString("resttime",binding.textResttime.text.toString())
+        editor.putString("longresttime",binding.textLongresettime.text.toString())
+        editor.putString("settime",binding.textSettime.text.toString())
+        editor.commit()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        pref()
     }
 }
