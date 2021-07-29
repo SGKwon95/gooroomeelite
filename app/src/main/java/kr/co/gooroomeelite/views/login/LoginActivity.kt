@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kr.co.gooroomeelite.R
 import kr.co.gooroomeelite.databinding.ActivityLoginBinding
 import kr.co.gooroomeelite.views.common.MainActivity
+import kr.co.gooroomeelite.views.common.OnBoardingActivity
 import kr.co.gooroomeelite.views.mypage.PrivacyPolicyActivity
 import kr.co.gooroomeelite.views.mypage.TermsOfServiceActivity
 
