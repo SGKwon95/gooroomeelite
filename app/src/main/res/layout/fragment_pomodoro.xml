@@ -72,25 +72,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_pomodoro" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button1_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/text_view_pomodoro"
             android:layout_centerHorizontal="true"
             android:text="세팅"
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/btn_restart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/text_view_pomodoro"
             android:layout_centerHorizontal="true"
             android:text="초기화"
+            android:textColor="@color/white"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/btn_restart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
