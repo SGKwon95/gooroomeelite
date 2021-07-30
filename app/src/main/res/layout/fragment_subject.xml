@@ -55,33 +55,42 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/subject_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:hint="과목 이름을 입력해 주세요."
-        android:inputType="textPersonName"
-        android:maxLength="20"
-        android:textColor="#333333"
-        android:textColorHighlight="@color/colorPrimary"
-        android:textColorHint="#DCDCDC"
-        android:textCursorDrawable="@drawable/color_cursor"
-        android:background="@drawable/inputbox_selector"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        >
 
-    <TextView
-        android:id="@+id/textCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="0 / 10"
-        android:layout_marginBottom="8dp"
-        android:textAlignment="viewEnd"
-        android:textColor="#B6B6B6"
-        android:textSize="13sp" />
+        <EditText
+            android:id="@+id/subject_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/inputbox_selector"
+            android:ems="10"
+            android:hint="과목 이름을 입력해 주세요."
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:textColor="#333333"
+            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHint="#DCDCDC"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/textCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 / 10"
+            android:textAlignment="viewEnd"
+            android:textColor="#B6B6B6"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/subject_name"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
         android:layout_width="match_parent"
