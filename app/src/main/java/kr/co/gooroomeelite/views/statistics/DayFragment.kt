@@ -427,9 +427,9 @@ class DayFragment : Fragment() {
             setDrawValues(false)
 
             val colors = ArrayList<Int>()
-            colors.add(Color.parseColor("#FFFF669E")) //빨
-            colors.add(Color.parseColor("#FF26D9AC")) //초
-            colors.add(Color.parseColor("#FF7F83EB")) //파
+            colors.add(Color.parseColor("#D2EBEE")) //빨
+            colors.add(Color.parseColor("#F2A6A0")) //초
+            colors.add(Color.parseColor("#CCE99E")) //파
             setColors(colors)
             highLightAlpha = 0
         }
